@@ -220,8 +220,8 @@ export default defineConfig({
     },
     socialLinks: [{ icon: 'github', link: 'https://github.com/can1357/oh-my-pi' }],
     footer: {
-      message: '本文档为 omp.sh 的非官方中文翻译。<br><a href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2023013812号-1</a>',
-      copyright: '原项目采用 MIT License'
+      message: '非官方中文翻译，仅供参考&nbsp;&nbsp;·&nbsp;&nbsp;<a href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2023013812号-1</a>&nbsp;&nbsp;·&nbsp;&nbsp;© 2020-2026 Powered by <a href="https://github.com/renranSy" target="_blank">renranSy</a>',
+      copyright: ''
     }
   }
 })

@@ -53,3 +53,14 @@ html:not(.dark) .shiki span[style*="--shiki-light:#D73A49"] {
     white-space: nowrap;
   }
 }
+
+.VPFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.VPFooter > p {
+  margin: 0;
+}
