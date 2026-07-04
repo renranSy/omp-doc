@@ -16,6 +16,21 @@ interface Manifest {
   pages: ManifestPage[]
 }
 
+// 加载 .env 以设置 process.env.SITE_URL（VitePress 配置需要直接读 process.env）
+import { resolve } from 'node:path'
+try {
+  const envFile = readFileSync(resolve(import.meta.dirname, '..', '..', '.env'), 'utf8')
+  for (const line of envFile.split('\n')) {
+    const eq = line.indexOf('=')
+    if (eq > 0 && !line.startsWith('#')) {
+      const key = line.slice(0, eq).trim()
+      const value = line.slice(eq + 1).trim()
+      if (key && !process.env[key]) process.env[key] = value
+    }
+  }
+} catch {}
+
+
 const manifestPath = fileURLToPath(new URL('../../scripts/content-manifest.json', import.meta.url))
 const manifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as Manifest
 const documentPages = manifest.pages.filter(page => page.slug !== '../index')
