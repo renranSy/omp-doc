@@ -3,6 +3,20 @@ import { spawnSync } from 'node:child_process'
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { resolve } from 'node:path'
 
+// 加载 .env
+try {
+  const envFile = readFileSync(resolve(import.meta.dirname, '..', '.env'), 'utf8')
+  for (const line of envFile.split('\n')) {
+    const eq = line.indexOf('=')
+    if (eq > 0 && !line.startsWith('#')) {
+      const key = line.slice(0, eq).trim()
+      const value = line.slice(eq + 1).trim()
+      if (key && !process.env[key]) process.env[key] = value
+    }
+  }
+} catch {}
+
+
 const root = resolve(import.meta.dirname, '..')
 const outDir = resolve(root, 'content/.vitepress/dist')
 const manifest = JSON.parse(readFileSync(resolve(root, 'scripts/content-manifest.json'), 'utf8'))
