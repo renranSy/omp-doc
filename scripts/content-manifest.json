@@ -1,0 +1,712 @@
+{
+  "capturedAt": "2026-07-05",
+  "source": "https://omp.sh",
+  "pages": [
+    {
+      "group": "首页",
+      "slug": "../index",
+      "sourceTitle": "omp — a coding agent with the IDE wired in",
+      "title": "omp 中文文档｜终端 AI 编程智能体指南",
+      "description": "omp 中文文档提供终端 AI 编程智能体的安装、配置、模型 Provider、会话、工具、扩展与 SDK 完整指南。",
+      "summary": "omp 是与 IDE 深度联动的终端编程智能体。本中文站覆盖快速开始、LSP、DAP、子智能体、计划模式、长期记忆、多模型 Provider 与扩展开发。",
+      "keywords": [
+        "omp",
+        "终端 AI 编程智能体",
+        "中文文档",
+        "AI 编程",
+        "LSP",
+        "子智能体"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "",
+      "sourceTitle": "Overview",
+      "title": "概览",
+      "description": "了解 omp 终端编程智能体的核心能力、适用人群、会话模型、子智能体、LSP、DAP 与多模型 Provider 支持。",
+      "summary": "本页概述 omp 的定位与主要特性，包括可分支会话、Hashline 编辑、子智能体协作、代码智能、调试和 GitHub 虚拟文件系统，并说明推荐的后续阅读路径。",
+      "keywords": [
+        "omp",
+        "终端编程智能体",
+        "AI 编程",
+        "LSP",
+        "子智能体"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "quickstart",
+      "sourceTitle": "Quickstart",
+      "title": "快速开始",
+      "description": "从安装 omp、配置终端和认证模型 Provider 开始，完成首次启动并发送第一条编程提示词。",
+      "summary": "快速完成 omp 的安装、终端按键协议配置和 Provider 认证，验证 CLI 是否可用，并在项目目录中启动交互式会话或执行单次提示词。",
+      "keywords": [
+        "omp 安装",
+        "快速开始",
+        "Provider 认证",
+        "终端配置",
+        "CLI"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "using",
+      "sourceTitle": "Using omp",
+      "title": "使用 omp",
+      "description": "掌握 omp 交互式会话的界面结构、编辑器功能、消息队列，以及 text、JSON、RPC 和 ACP 等运行方式。",
+      "summary": "本页介绍 omp TUI 的 Header、消息区、编辑器与 Footer，说明文件引用、Shell 转义、消息转向、后续队列及非交互模式的使用方式。",
+      "keywords": [
+        "omp 使用",
+        "TUI",
+        "消息队列",
+        "交互式会话",
+        "运行模式"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "slash",
+      "sourceTitle": "Slash commands",
+      "title": "斜杠命令",
+      "description": "按类别查询 omp 的斜杠命令，覆盖会话、模型、计划、认证、扩展、工具和界面控制等常用操作。",
+      "summary": "本页汇总 omp 会话内可用的斜杠命令，并解释命令补全、参数输入以及 `/plan`、`/model`、`/login`、`/agents` 等入口的用途。",
+      "keywords": [
+        "omp 斜杠命令",
+        "slash command",
+        "会话命令",
+        "模型切换",
+        "CLI"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "keybindings",
+      "sourceTitle": "Keybindings",
+      "title": "快捷键",
+      "description": "查询并自定义 omp 的默认快捷键，覆盖编辑器导航、消息发送、模型切换、计划模式和智能体面板。",
+      "summary": "本页列出 omp TUI 的默认快捷键和终端兼容注意事项，并说明如何通过 keybindings.yml 重映射操作或为同一动作配置多个按键。",
+      "keywords": [
+        "omp 快捷键",
+        "keybindings",
+        "TUI",
+        "终端按键",
+        "快捷键配置"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "settings",
+      "sourceTitle": "Settings",
+      "title": "设置",
+      "description": "了解 ~/.omp/agent/config.yml 的结构、配置优先级、常用设置项，以及模型角色和交互行为的配置方法。",
+      "summary": "本页说明 omp 配置文件的位置与加载优先级，列出顶级设置和常用选项，并给出模型角色、工具发现、消息队列及项目范围配置示例。",
+      "keywords": [
+        "omp 配置",
+        "config.yml",
+        "设置项",
+        "模型角色",
+        "配置优先级"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "modes",
+      "sourceTitle": "Run modes",
+      "title": "运行模式",
+      "description": "了解 omp 的循环模式、强制工具模式和快速模式，选择适合持续修复、指定工具或优先推理的运行方式。",
+      "summary": "本页解释 `/loop`、`/force` 与 `/fast` 的行为、持续时间和组合方式，帮助你针对长时间任务、工具约束或低延迟请求选择运行模式。",
+      "keywords": [
+        "omp 运行模式",
+        "loop mode",
+        "force tool",
+        "fast mode",
+        "自动化编程"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "sessions",
+      "sourceTitle": "Sessions",
+      "title": "会话",
+      "description": "管理 omp 的持久化会话：恢复历史、浏览会话树、创建分支或 Fork、压缩上下文、导出并共享记录。",
+      "summary": "本页介绍 omp 会话在磁盘上的 append-only 树结构，以及 CLI 与斜杠命令中的恢复、分支、Fork、切换、导出和共享工作流。",
+      "keywords": [
+        "omp 会话",
+        "会话恢复",
+        "会话分支",
+        "Fork",
+        "JSONL"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "session-tree",
+      "sourceTitle": "Session tree",
+      "title": "会话树",
+      "description": "深入理解 omp 会话树的父子关系、叶节点移动、Branch 与 Fork 差异，以及恢复、导出和共享的实现语义。",
+      "summary": "本页从数据模型角度解释每条会话记录的 parentId、`/tree` 导航、`/branch` 与 `/fork` 的区别，以及 CLI 恢复如何选择活动叶节点。",
+      "keywords": [
+        "omp 会话树",
+        "parentId",
+        "Branch",
+        "Fork",
+        "会话导航"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "memory",
+      "sourceTitle": "Memory",
+      "title": "记忆",
+      "description": "配置 omp 的跨会话记忆，比较本地记忆与 Hindsight 后端，并使用 retain、recall、reflect 管理长期知识。",
+      "summary": "本页区分长期记忆与上下文压缩，介绍本地后端和 Hindsight 的作用域、自动召回、写入工具、配置选项及故障处理方式。",
+      "keywords": [
+        "omp 记忆",
+        "Hindsight",
+        "长期记忆",
+        "retain",
+        "recall"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "compaction",
+      "sourceTitle": "Compaction",
+      "title": "上下文压缩",
+      "description": "了解 omp 如何通过上下文压缩保留近期对话、总结旧记录，并在模型窗口接近上限时自动维护会话。",
+      "summary": "本页说明手动与自动压缩的触发条件、工具输出裁剪、非压缩重试和上下文检查方法，以及压缩对磁盘会话记录的影响。",
+      "keywords": [
+        "上下文压缩",
+        "context window",
+        "omp 会话",
+        "Token",
+        "compact"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "plan",
+      "sourceTitle": "Plan mode",
+      "title": "计划模式",
+      "description": "使用 omp 计划模式在执行前进行只读分析、生成计划文件、审查方案，并选择执行、保留或压缩规划记录。",
+      "summary": "本页介绍 `/plan` 如何使用独立模型角色进行只读规划，解释计划审查循环、退出选项、快捷键与适合启用计划模式的任务类型。",
+      "keywords": [
+        "omp 计划模式",
+        "Plan mode",
+        "代码规划",
+        "模型角色",
+        "只读分析"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "goal",
+      "sourceTitle": "Goal mode",
+      "title": "目标模式",
+      "description": "使用 omp 目标模式持续推进带 Token 预算的自动化目标，并检查、暂停、恢复、完成或放弃执行循环。",
+      "summary": "本页介绍 `/goal` 的自动延续机制、目标状态、预算限制和完成验证，帮助你安全运行需要多轮自主推进的编程任务。",
+      "keywords": [
+        "omp 目标模式",
+        "Goal mode",
+        "自主编程",
+        "Token 预算",
+        "自动循环"
+      ]
+    },
+    {
+      "group": "开始",
+      "slug": "handoff",
+      "sourceTitle": "Handoff",
+      "title": "交接",
+      "description": "通过 omp Handoff 生成结构化交接摘要，在保留旧会话的同时开启带完整上下文的新会话。",
+      "summary": "本页说明 `/handoff` 何时适用、摘要包含哪些状态、如何创建新会话，以及取消、失败、读取与后续 Fork 时的行为。",
+      "keywords": [
+        "omp Handoff",
+        "会话交接",
+        "上下文迁移",
+        "会话摘要",
+        "新会话"
+      ]
+    },
+    {
+      "group": "能力",
+      "slug": "files",
+      "sourceTitle": "Working with files",
+      "title": "处理文件",
+      "description": "使用 omp 的 read、write、edit、find 和 search 工具处理文件、目录、URL、归档与结构化数据。",
+      "summary": "本页介绍五类文件工具共享的选择器语法、Hashline 锚点和安全编辑机制，并给出读取、写入、查找和正则搜索示例。",
+      "keywords": [
+        "omp 文件工具",
+        "read",
+        "edit",
+        "search",
+        "Hashline"
+      ]
+    },
+    {
+      "group": "能力",
+      "slug": "code-intelligence",
+      "sourceTitle": "Code intelligence",
+      "title": "代码智能",
+      "description": "使用 omp 内置 LSP 完成符号重命名、引用查询、定义跳转、Hover、诊断和 Code Action。",
+      "summary": "本页介绍 omp 的语言服务器能力、支持的操作与服务器配置，并演示如何在整个代码库中安全重命名符号和应用诊断修复。",
+      "keywords": [
+        "omp LSP",
+        "代码智能",
+        "符号重命名",
+        "Code Action",
+        "代码诊断"
+      ]
+    },
+    {
+      "group": "能力",
+      "slug": "debugging",
+      "sourceTitle": "Debugging",
+      "title": "调试",
+      "description": "使用 omp 的 DAP 调试工具启动或附加进程，设置断点、单步执行、读取变量并计算表达式。",
+      "summary": "本页说明何时使用运行时调试、如何启用 debug 工具、选择适配器，并通过 DAP Action 完成断点、线程、栈帧和变量检查。",
+      "keywords": [
+        "omp 调试",
+        "DAP",
+        "断点调试",
+        "debug adapter",
+        "变量检查"
+      ]
+    },
+    {
+      "group": "能力",
+      "slug": "editing",
+      "sourceTitle": "Structural edits",
+      "title": "结构化编辑",
+      "description": "使用 ast_edit 执行结构化代码重写，并通过 conflict:// 与 resolve 工具预览、接受或解决合并冲突。",
+      "summary": "本页比较 Hashline 编辑、AST 结构化编辑和 LSP 重命名的适用场景，介绍 ast-grep 模式及冲突预览、接受和丢弃流程。",
+      "keywords": [
+        "结构化编辑",
+        "ast_edit",
+        "ast-grep",
+        "合并冲突",
+        "代码重写"
+      ]
+    },
+    {
+      "group": "能力",
+      "slug": "subagents",
+      "sourceTitle": "Subagents & IRC",
+      "title": "子智能体与 IRC",
+      "description": "使用 task 工具并行生成 omp 子智能体，通过进程内 IRC 查看 Peer、发送消息并协调独立任务。",
+      "summary": "本页介绍内置子智能体、并发限制、异步结果和 agent:// 记录，并说明运行中的同级智能体如何通过 IRC 直接协作。",
+      "keywords": [
+        "omp 子智能体",
+        "Subagent",
+        "IRC",
+        "task tool",
+        "并行编程"
+      ]
+    },
+    {
+      "group": "能力",
+      "slug": "collab",
+      "sourceTitle": "Collab",
+      "title": "协作",
+      "description": "使用 omp Collab 建立端到端加密的实时协作会话，控制访客的查看、提示、中断和子智能体权限。",
+      "summary": "本页介绍 `/collab` 与 `/join` 的启动方式、链接格式、AES-256-GCM 加密、访客权限模型及浏览器客户端的安全边界。",
+      "keywords": [
+        "omp Collab",
+        "实时协作",
+        "端到端加密",
+        "共享会话",
+        "访客权限"
+      ]
+    },
+    {
+      "group": "能力",
+      "slug": "web",
+      "sourceTitle": "Web & browser",
+      "title": "Web 与浏览器",
+      "description": "使用 omp 的 web_search、URL read 和 browser 工具搜索网络、提取网页内容并自动操作浏览器。",
+      "summary": "本页比较网络搜索、URL 读取和浏览器自动化的适用场景，介绍 Provider 链、Reader 模式、页面选择器和持久化浏览器标签。",
+      "keywords": [
+        "omp Web",
+        "web_search",
+        "浏览器自动化",
+        "网页读取",
+        "网络搜索"
+      ]
+    },
+    {
+      "group": "能力",
+      "slug": "github",
+      "sourceTitle": "GitHub",
+      "title": "GitHub",
+      "description": "通过 omp 的 pr://、issue:// 虚拟 URL 和 github 工具读取、审查并操作 GitHub Issue 与 Pull Request。",
+      "summary": "本页说明 omp 如何复用 gh CLI 凭据，把 PR、Issue 和 Diff 暴露为虚拟文件，并通过结构化 Action 完成评论、审查和写操作。",
+      "keywords": [
+        "omp GitHub",
+        "Pull Request",
+        "GitHub Issue",
+        "代码审查",
+        "gh CLI"
+      ]
+    },
+    {
+      "group": "模型",
+      "slug": "providers",
+      "sourceTitle": "Providers",
+      "title": "Provider",
+      "description": "配置 omp 模型 Provider 的环境变量、OAuth 与 API Key，了解凭据优先级、Auth Broker 和 Gateway。",
+      "summary": "本页比较三种认证方式，列出支持 OAuth 的 Provider，解释凭据解析顺序，并介绍跨机器共享凭据的 Auth Broker 与转发 Gateway。",
+      "keywords": [
+        "omp Provider",
+        "OAuth",
+        "API Key",
+        "Auth Broker",
+        "模型认证"
+      ]
+    },
+    {
+      "group": "模型",
+      "slug": "roles",
+      "sourceTitle": "Model roles",
+      "title": "模型角色",
+      "description": "为 omp 的 default、smol、slow、plan 等模型角色指定不同模型，并通过配置、环境变量和快捷键切换。",
+      "summary": "本页解释模型角色如何让 omp 针对任务选择合适模型，介绍 modelRoles 配置、CLI 覆盖、思考级别和会话内模型循环。",
+      "keywords": [
+        "omp 模型角色",
+        "modelRoles",
+        "模型切换",
+        "Plan 模型",
+        "smol 模型"
+      ]
+    },
+    {
+      "group": "模型",
+      "slug": "custom-models",
+      "sourceTitle": "Custom models & providers",
+      "title": "自定义模型与 Provider",
+      "description": "在 models.yml 中添加自定义模型与 Provider，配置端点、认证、模型字段、覆盖规则和本地模型发现。",
+      "summary": "本页详解 omp 自定义模型配置格式，包括兼容 API、Provider 覆盖、OAuth、动态发现、规范模型映射和多个完整配置示例。",
+      "keywords": [
+        "omp 自定义模型",
+        "models.yml",
+        "自定义 Provider",
+        "本地模型",
+        "模型配置"
+      ]
+    },
+    {
+      "group": "自定义",
+      "slug": "context-files",
+      "sourceTitle": "Context files",
+      "title": "上下文文件",
+      "description": "使用 AGENTS.md、SYSTEM.md、APPEND_SYSTEM.md 和 RULES.md 为 omp 提供项目说明、系统提示与持久规则。",
+      "summary": "本页介绍四种上下文文件的用途、搜索位置和解析顺序，并给出编写紧凑 AGENTS.md、粘性 RULES.md 与作用域规则的建议。",
+      "keywords": [
+        "AGENTS.md",
+        "omp 上下文",
+        "RULES.md",
+        "SYSTEM.md",
+        "项目规则"
+      ]
+    },
+    {
+      "group": "自定义",
+      "slug": "skills",
+      "sourceTitle": "Skills",
+      "title": "Skills",
+      "description": "编写和加载 omp Skills，通过 SKILL.md 的 frontmatter 与按需正文为智能体提供可复用工作流程。",
+      "summary": "本页说明 Skill 的目录布局、发现顺序、frontmatter 字段和描述写法，并给出完整 SKILL.md 示例及调试方法。",
+      "keywords": [
+        "omp Skills",
+        "SKILL.md",
+        "智能体工作流",
+        "frontmatter",
+        "可复用提示词"
+      ]
+    },
+    {
+      "group": "自定义",
+      "slug": "prompt-templates",
+      "sourceTitle": "Prompt templates",
+      "title": "提示词模板",
+      "description": "使用 Markdown 或 TypeScript 创建 omp 提示词模板，把可复用 Prompt 注册为带参数和自定义 UI 的斜杠命令。",
+      "summary": "本页比较 Markdown 与 TypeScript 两类 Prompt Template，介绍文件位置、frontmatter、参数插值、模块接口和模板调试方式。",
+      "keywords": [
+        "omp 提示词模板",
+        "Prompt Template",
+        "斜杠命令",
+        "Markdown 模板",
+        "TypeScript"
+      ]
+    },
+    {
+      "group": "自定义",
+      "slug": "hooks",
+      "sourceTitle": "Hooks",
+      "title": "Hooks",
+      "description": "使用 omp Hooks 在工具调用和生命周期事件前后执行 TypeScript 逻辑，实现拦截、审计、脱敏与自动化。",
+      "summary": "本页介绍 Hook 的发现位置和事件能力，并通过阻止危险 Bash、编辑工具输出中的 Secret 等示例说明处理器返回值和调试方法。",
+      "keywords": [
+        "omp Hooks",
+        "生命周期 Hook",
+        "工具拦截",
+        "安全审计",
+        "TypeScript"
+      ]
+    },
+    {
+      "group": "自定义",
+      "slug": "custom-tools",
+      "sourceTitle": "Custom tools",
+      "title": "自定义工具",
+      "description": "为 omp 编写带 Zod Schema 的自定义工具，让模型安全调用项目 API、领域检查或远程系统操作。",
+      "summary": "本页说明何时选择 Custom Tool 而不是 MCP，介绍工具文件位置、注册骨架、字段、流式输出、上下文和错误处理。",
+      "keywords": [
+        "omp 自定义工具",
+        "Custom Tool",
+        "Zod",
+        "工具调用",
+        "Extension API"
+      ]
+    },
+    {
+      "group": "自定义",
+      "slug": "subagent-authoring",
+      "sourceTitle": "Authoring subagents",
+      "title": "编写子智能体",
+      "description": "通过 Markdown frontmatter 定义 omp 子智能体，配置名称、描述、工具、模型、权限与可生成的下级智能体。",
+      "summary": "本页介绍子智能体定义文件的搜索顺序、完整字段、同名覆盖和调度方式，并说明如何通过 `/agents` 迭代与检查定义。",
+      "keywords": [
+        "omp 子智能体定义",
+        "Subagent",
+        "智能体编排",
+        "frontmatter",
+        "task tool"
+      ]
+    },
+    {
+      "group": "自定义",
+      "slug": "mcp",
+      "sourceTitle": "MCP",
+      "title": "MCP",
+      "description": "配置 omp MCP Server 的 stdio 与 HTTP Transport、OAuth、Header、工具发现、作用域和连接生命周期。",
+      "summary": "本页说明何时使用 MCP，介绍 mcp.json 配置格式、本地与远程 Transport、认证方式、工具命名和运行时重连行为。",
+      "keywords": [
+        "omp MCP",
+        "MCP Server",
+        "stdio",
+        "HTTP Transport",
+        "OAuth"
+      ]
+    },
+    {
+      "group": "自定义",
+      "slug": "mcp-authoring",
+      "sourceTitle": "Authoring MCP servers",
+      "title": "编写 MCP Server",
+      "description": "编写可供 omp 和其他 MCP Client 使用的 Server，实现 stdio 或流式 HTTP Transport 与类型化工具。",
+      "summary": "本页给出最小 MCP Server 和 HTTP 变体，说明 JSON Schema、工具结果、认证与测试方法，帮助构建跨编辑器集成。",
+      "keywords": [
+        "MCP Server 开发",
+        "omp MCP",
+        "stdio Server",
+        "JSON Schema",
+        "MCP SDK"
+      ]
+    },
+    {
+      "group": "自定义",
+      "slug": "themes",
+      "sourceTitle": "Themes",
+      "title": "主题",
+      "description": "切换 omp 内置终端主题，或通过 JSON 主题文件自定义颜色 Token、语法高亮、Diff 与符号集。",
+      "summary": "本页介绍内置主题目录、主题切换命令、自定义文件位置、完整 UI 颜色键和符号配置，并说明校验与调试方式。",
+      "keywords": [
+        "omp 主题",
+        "终端配色",
+        "自定义 Theme",
+        "语法高亮",
+        "TUI"
+      ]
+    },
+    {
+      "group": "自定义",
+      "slug": "ttsr",
+      "sourceTitle": "TTSR rules",
+      "title": "TTSR 规则",
+      "description": "编写 omp TTSR 规则，在模型输出命中正则条件时中止生成、注入系统提醒并安全重试当前请求。",
+      "summary": "本页解释 Time-Traveling Stream Rules 的匹配与重试机制，介绍规则目录、frontmatter、条件写法、示例和调试建议。",
+      "keywords": [
+        "omp TTSR",
+        "流式规则",
+        "模型输出校验",
+        "正则规则",
+        "系统提醒"
+      ]
+    },
+    {
+      "group": "自定义",
+      "slug": "plugins",
+      "sourceTitle": "Plugins",
+      "title": "Plugins",
+      "description": "安装、移除、更新和管理 omp Plugins，并了解 Plugin 来源、项目作用域、可捆绑能力与安全边界。",
+      "summary": "本页介绍 Plugin 命令、Git 与 Marketplace 来源、用户和项目安装范围，以及 Extension、Skill、Hook、工具和 MCP 的捆绑方式。",
+      "keywords": [
+        "omp Plugin",
+        "插件管理",
+        "omp install",
+        "Marketplace",
+        "Extension"
+      ]
+    },
+    {
+      "group": "自定义",
+      "slug": "extension-authoring",
+      "sourceTitle": "Authoring extensions",
+      "title": "编写扩展",
+      "description": "创建带 package.json 清单的 omp Extension，注册工具、命令和事件，并打包 Skills、Hooks 与其他功能。",
+      "summary": "本页介绍 Extension Package 的清单、目录布局、TypeScript 工厂模块和完整示例，并说明本地加载、安装与调试流程。",
+      "keywords": [
+        "omp Extension",
+        "Extension 开发",
+        "package.json",
+        "TypeScript",
+        "Plugin"
+      ]
+    },
+    {
+      "group": "自定义",
+      "slug": "marketplace",
+      "sourceTitle": "Marketplaces",
+      "title": "Marketplace",
+      "description": "创建和使用 omp Marketplace，从 Git、本地目录或 JSON Catalog 发现、安装并维护团队 Plugin 集合。",
+      "summary": "本页介绍 Marketplace 来源、添加与浏览命令、Catalog Schema、Plugin Source 写法，以及如何发布可复用的插件目录。",
+      "keywords": [
+        "omp Marketplace",
+        "Plugin Catalog",
+        "插件市场",
+        "marketplace.json",
+        "Git"
+      ]
+    },
+    {
+      "group": "编程接口",
+      "slug": "sdk",
+      "sourceTitle": "SDK",
+      "title": "SDK",
+      "description": "使用 @oh-my-pi/pi-coding-agent SDK 在 TypeScript 中创建会话、流式处理事件并注册自定义工具。",
+      "summary": "本页介绍 omp SDK 的安装、会话创建、事件流、模型与工具覆盖、CustomTool 接口、持久化管理及资源释放方式。",
+      "keywords": [
+        "omp SDK",
+        "TypeScript SDK",
+        "AgentSession",
+        "CustomTool",
+        "编程接口"
+      ]
+    },
+    {
+      "group": "编程接口",
+      "slug": "rpc",
+      "sourceTitle": "RPC mode",
+      "title": "RPC 模式",
+      "description": "通过 stdio 使用 omp RPC 模式，以 JSON 消息发送命令、接收事件流，并从任意语言驱动编程智能体。",
+      "summary": "本页定义 RPC 模式的启动方式、消息格式、命令与事件类型，提供 Shell 示例，并说明会话持久化和 UI 请求处理。",
+      "keywords": [
+        "omp RPC",
+        "JSON-RPC",
+        "stdio",
+        "事件流",
+        "编程接口"
+      ]
+    },
+    {
+      "group": "编程接口",
+      "slug": "acp",
+      "sourceTitle": "ACP",
+      "title": "ACP",
+      "description": "通过 Agent Client Protocol 将 omp 嵌入 Zed 等编辑器，路由文件、终端、权限提示、模式和会话操作。",
+      "summary": "本页介绍 ACP 初始化、认证、Client Capability、工具 I/O 路由、权限请求、斜杠命令、模式更新和会话管理扩展。",
+      "keywords": [
+        "omp ACP",
+        "Agent Client Protocol",
+        "Zed",
+        "编辑器集成",
+        "JSON-RPC"
+      ]
+    },
+    {
+      "group": "参考",
+      "slug": "cli",
+      "sourceTitle": "CLI reference",
+      "title": "CLI 参考",
+      "description": "查询 omp CLI 的全部 Flag、运行模式、模型、会话、工具、扩展、认证选项和独立子命令。",
+      "summary": "本页按用途整理 omp CLI 的参数优先级、输出协议、模型与角色覆盖、会话恢复、工具限制、资源加载和常用命令示例。",
+      "keywords": [
+        "omp CLI",
+        "命令行参考",
+        "CLI Flag",
+        "omp 命令",
+        "终端编程智能体"
+      ]
+    },
+    {
+      "group": "参考",
+      "slug": "env",
+      "sourceTitle": "Environment variables",
+      "title": "环境变量",
+      "description": "查询 omp 支持的环境变量，覆盖运行时目录、Provider 凭据、云平台、Web 搜索、本地模型、TUI 与调试设置。",
+      "summary": "本页按类别列出 omp 环境变量及解析优先级，包括 OAuth 与 API Key、Azure、AWS、Vertex、本地模型、子智能体和 Shell 行为。",
+      "keywords": [
+        "omp 环境变量",
+        "API Key",
+        "Provider 配置",
+        "本地模型",
+        "云模型"
+      ]
+    },
+    {
+      "group": "参考",
+      "slug": "secrets",
+      "sourceTitle": "Secrets and auth",
+      "title": "密钥与认证",
+      "description": "了解 omp 如何在 agent.db 中存储 OAuth 与 API Key，并通过 Auth Broker 和 Gateway 跨机器安全共享凭据。",
+      "summary": "本页介绍凭据存储格式、登录与退出、解析优先级、文件权限、远程 Broker、SSH 登录代理和 Gateway 转发的安全模型。",
+      "keywords": [
+        "omp 认证",
+        "agent.db",
+        "OAuth",
+        "Auth Broker",
+        "API Key"
+      ]
+    },
+    {
+      "group": "参考",
+      "slug": "session-format",
+      "sourceTitle": "Session format",
+      "title": "会话格式",
+      "description": "了解 omp 会话 JSONL 文件的 Envelope、会话 Header、消息 Entry、内容块、树关系和生命周期记录格式。",
+      "summary": "本页定义磁盘会话文件路径、Entry 与 Session ID、parentId、消息和工具结果结构，以及压缩、模型切换等生命周期事件。",
+      "keywords": [
+        "omp 会话格式",
+        "JSONL",
+        "session schema",
+        "parentId",
+        "会话存储"
+      ]
+    },
+    {
+      "group": "参考",
+      "slug": "tools",
+      "sourceTitle": "Tools index",
+      "title": "工具索引",
+      "description": "浏览 omp 内置工具索引，快速了解文件、运行时、代码智能、Web、记忆、子智能体和系统工具的用途。",
+      "summary": "本页按名称列出 omp 开箱即用的工具及其职责，并链接到文件操作、LSP、DAP、Web、记忆、任务编排等详细文档。",
+      "keywords": [
+        "omp 工具",
+        "工具索引",
+        "AI 工具调用",
+        "LSP",
+        "子智能体"
+      ]
+    }
+  ]
+}

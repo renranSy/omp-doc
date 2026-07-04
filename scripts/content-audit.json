@@ -1,0 +1,313 @@
+{
+  "capturedAt": "2026-07-05",
+  "pages": {
+    "using": {
+      "headings": 5,
+      "codeBlocks": 0,
+      "codeDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourceBytes": 6115,
+      "translated": true
+    },
+    "slash": {
+      "headings": 14,
+      "codeBlocks": 4,
+      "codeDigest": "3e2001aa60a5e41a1f702c349aee458bdaca3ad1dd02dd5b5e18fc08e01c4d55",
+      "sourceBytes": 10548,
+      "translated": true
+    },
+    "keybindings": {
+      "headings": 9,
+      "codeBlocks": 1,
+      "codeDigest": "f7f695004a362f39ba81861e9174b664763e467ea46deb34e2673400a55c1160",
+      "sourceBytes": 7058,
+      "translated": true
+    },
+    "settings": {
+      "headings": 9,
+      "codeBlocks": 5,
+      "codeDigest": "2d4592737d0f46ef6d349d1e6acb6208e4be8a5c85cae29f88c2fc19764dab52",
+      "sourceBytes": 5438,
+      "translated": true
+    },
+    "modes": {
+      "headings": 5,
+      "codeBlocks": 3,
+      "codeDigest": "ae99ce930006a074d7e6750ce6a6701e5b7eff88d18a4989d244693c9d3a32b2",
+      "sourceBytes": 4606,
+      "translated": true
+    },
+    "sessions": {
+      "headings": 15,
+      "codeBlocks": 12,
+      "codeDigest": "6f800aca4e532598018100cdb9a31be54256ae36001021a305516dd0891d8e29",
+      "sourceBytes": 11494,
+      "translated": true
+    },
+    "session-tree": {
+      "headings": 6,
+      "codeBlocks": 1,
+      "codeDigest": "7c512f5d93863581911a8cc5e1199016fb527dc10faca0c83c32de07a18aaae5",
+      "sourceBytes": 6317,
+      "translated": true
+    },
+    "memory": {
+      "headings": 12,
+      "codeBlocks": 5,
+      "codeDigest": "ac9349f804b7b5cd4b7052f4151da3fa8a7389cd7262575d3c1c82e9aba523b5",
+      "sourceBytes": 10953,
+      "translated": true
+    },
+    "compaction": {
+      "headings": 7,
+      "codeBlocks": 3,
+      "codeDigest": "e61b59401b22adb6138de8f312b7d82c829778d8052f9e954bb8cf7ba5ae9772",
+      "sourceBytes": 8597,
+      "translated": true
+    },
+    "plan": {
+      "headings": 6,
+      "codeBlocks": 1,
+      "codeDigest": "5cefd71cdd9a54405f249d9b8728aea1ddeffd5282963f74b8b674a0dcc33a77",
+      "sourceBytes": 3787,
+      "translated": true
+    },
+    "goal": {
+      "headings": 7,
+      "codeBlocks": 1,
+      "codeDigest": "c424a304b94f5ae47289ad9d79fe8fb535078bce1adfba87827c43cf495f0adc",
+      "sourceBytes": 6991,
+      "translated": true
+    },
+    "handoff": {
+      "headings": 6,
+      "codeBlocks": 1,
+      "codeDigest": "8caf5cb8850ddb2436c3cdab9b108f62df0092bfb302014a357df88589be02f2",
+      "sourceBytes": 5118,
+      "translated": true
+    },
+    "files": {
+      "headings": 6,
+      "codeBlocks": 6,
+      "codeDigest": "3bf784ecbbb3ff03d5f92f93f1592cfcda0ed9bb58d31dc035abbd79a7b98ae1",
+      "sourceBytes": 7728,
+      "translated": true
+    },
+    "code-intelligence": {
+      "headings": 6,
+      "codeBlocks": 2,
+      "codeDigest": "21a384c48c1e0b70ee955d9fe245ce257d176ab2dca0f8dddf576dd4db8edaa7",
+      "sourceBytes": 6466,
+      "translated": true
+    },
+    "debugging": {
+      "headings": 5,
+      "codeBlocks": 2,
+      "codeDigest": "1d310d11628118b32ed7c8a7531d8214e5369a50050fa7f20df84549205e2588",
+      "sourceBytes": 6083,
+      "translated": true
+    },
+    "editing": {
+      "headings": 4,
+      "codeBlocks": 3,
+      "codeDigest": "f296b2f482bb1ba086f7764b9ae16f9e946896c2ec1d96e699e62be248d565a5",
+      "sourceBytes": 6382,
+      "translated": true
+    },
+    "subagents": {
+      "headings": 6,
+      "codeBlocks": 1,
+      "codeDigest": "5ac60c532a4dfd9373b01c0a4b8ef4fcef6355badbaff9dafb94d6c875c58af6",
+      "sourceBytes": 5826,
+      "translated": true
+    },
+    "collab": {
+      "headings": 7,
+      "codeBlocks": 4,
+      "codeDigest": "63ef64ea9f4e20d5f88c53e9cef0ba8a2cf3e0ff3a51994f497cbc6c1f15339e",
+      "sourceBytes": 5992,
+      "translated": true
+    },
+    "web": {
+      "headings": 4,
+      "codeBlocks": 4,
+      "codeDigest": "047567040c36df3622c19d6135ecd1b9422a3437ff7d56721e97f95413775691",
+      "sourceBytes": 4693,
+      "translated": true
+    },
+    "github": {
+      "headings": 5,
+      "codeBlocks": 4,
+      "codeDigest": "3a3c87c81709abf650104567f5f97d37cb047221304f9bb316476be38db1589c",
+      "sourceBytes": 5185,
+      "translated": true
+    },
+    "providers": {
+      "headings": 5,
+      "codeBlocks": 3,
+      "codeDigest": "f3720de1bc0fa80eff9f483cbb778abcf85023002fa9a50d5dfdc356335e92d9",
+      "sourceBytes": 6167,
+      "translated": true
+    },
+    "roles": {
+      "headings": 4,
+      "codeBlocks": 3,
+      "codeDigest": "734243412e9d0c098761db4bea30b93dfa5bb701b370e982cb21aa48717fb543",
+      "sourceBytes": 3701,
+      "translated": true
+    },
+    "custom-models": {
+      "headings": 9,
+      "codeBlocks": 4,
+      "codeDigest": "d20bb1e4ac228849c5b20e178fcbc247300040946d384b11cfb0f19cd879bed8",
+      "sourceBytes": 6409,
+      "translated": true
+    },
+    "context-files": {
+      "headings": 7,
+      "codeBlocks": 3,
+      "codeDigest": "04dd0ec449d22bc8169a350e5e993b287c7ee73d9c9789be01f6fdd11859abfd",
+      "sourceBytes": 5885,
+      "translated": true
+    },
+    "skills": {
+      "headings": 6,
+      "codeBlocks": 2,
+      "codeDigest": "0064486f0e4208ca59c9be5a674a54f81fb92d945acf03d2d3c626804aee8b84",
+      "sourceBytes": 4500,
+      "translated": true
+    },
+    "prompt-templates": {
+      "headings": 6,
+      "codeBlocks": 3,
+      "codeDigest": "d864cf9262680528f51ecd36cef912d182c1372a1b041fd8cfa27d584ba48a82",
+      "sourceBytes": 4207,
+      "translated": true
+    },
+    "hooks": {
+      "headings": 5,
+      "codeBlocks": 3,
+      "codeDigest": "59c6342886417d876b6f414dd5a35bd839a35780cea5cff16f801ff3c51efe5c",
+      "sourceBytes": 4368,
+      "translated": true
+    },
+    "custom-tools": {
+      "headings": 8,
+      "codeBlocks": 2,
+      "codeDigest": "09a63a70f25369b27cc1d575fe1b9200bb33fca1329bd08b14d5995e538516ca",
+      "sourceBytes": 4471,
+      "translated": true
+    },
+    "subagent-authoring": {
+      "headings": 5,
+      "codeBlocks": 3,
+      "codeDigest": "7104bc4d6dd01d59645cacc920837b7a6a9b06edf16b5b04597761f2aae63bd9",
+      "sourceBytes": 5591,
+      "translated": true
+    },
+    "mcp": {
+      "headings": 8,
+      "codeBlocks": 3,
+      "codeDigest": "450d27abd7559359b5b5df8c1741abd70e1b5f1867b9240931f4193486e7f0ab",
+      "sourceBytes": 5293,
+      "translated": true
+    },
+    "mcp-authoring": {
+      "headings": 6,
+      "codeBlocks": 3,
+      "codeDigest": "4dd3b90eebf966816da14fbbdae89172f34e8ce378f5bd36e03b7800c0919138",
+      "sourceBytes": 5009,
+      "translated": true
+    },
+    "themes": {
+      "headings": 7,
+      "codeBlocks": 2,
+      "codeDigest": "19c8b6314cc4b0af41966dcaf07fb0deff15986e8b0fdcfb88de055f90d63715",
+      "sourceBytes": 4700,
+      "translated": true
+    },
+    "ttsr": {
+      "headings": 7,
+      "codeBlocks": 2,
+      "codeDigest": "87644c2c53c143f81c5900f79418704558e850e45967bb99ad6dbfd2f538b8da",
+      "sourceBytes": 5371,
+      "translated": true
+    },
+    "plugins": {
+      "headings": 8,
+      "codeBlocks": 2,
+      "codeDigest": "379ce8049bb3d4c5ce45e251ba5f268d7eda832e68db94c36868722648a672ee",
+      "sourceBytes": 5788,
+      "translated": true
+    },
+    "extension-authoring": {
+      "headings": 7,
+      "codeBlocks": 7,
+      "codeDigest": "e7b8f7235afb8953814ebd9b23685444072e4410cf5095642632014777c58ab6",
+      "sourceBytes": 7001,
+      "translated": true
+    },
+    "marketplace": {
+      "headings": 7,
+      "codeBlocks": 5,
+      "codeDigest": "295bc66b2173b4c1610d1a45a983836a64e81a9a734b7d2f792ba7e0ea9334c1",
+      "sourceBytes": 6451,
+      "translated": true
+    },
+    "sdk": {
+      "headings": 6,
+      "codeBlocks": 3,
+      "codeDigest": "c12247de647f8dc32dcffe969531832b5bfb7806a03be37e591e2a05f454514a",
+      "sourceBytes": 5953,
+      "translated": true
+    },
+    "rpc": {
+      "headings": 6,
+      "codeBlocks": 3,
+      "codeDigest": "7db578887769f56dbe00d5782628a72df90dd7bd393bcc23c70694a1a858959c",
+      "sourceBytes": 6985,
+      "translated": true
+    },
+    "acp": {
+      "headings": 7,
+      "codeBlocks": 2,
+      "codeDigest": "a9e9905a772de76ed5447bf204349737a593f909b284adb253b56c9197e545c0",
+      "sourceBytes": 4721,
+      "translated": true
+    },
+    "cli": {
+      "headings": 11,
+      "codeBlocks": 2,
+      "codeDigest": "d9af7fc119840281f4cb9e6293415ec62b6adb2df278ff18176b8777e07e9bd7",
+      "sourceBytes": 14369,
+      "translated": true
+    },
+    "env": {
+      "headings": 18,
+      "codeBlocks": 1,
+      "codeDigest": "eab86f9bab9f49950338b0aa4cc1e76bfea11e41a43bf88c80b25bd8bce39fcf",
+      "sourceBytes": 23914,
+      "translated": true
+    },
+    "secrets": {
+      "headings": 6,
+      "codeBlocks": 1,
+      "codeDigest": "40182c9742c4e96282e88221ff46c5be5056a948b11415dd0b39c84392b78875",
+      "sourceBytes": 7038,
+      "translated": true
+    },
+    "session-format": {
+      "headings": 8,
+      "codeBlocks": 3,
+      "codeDigest": "777f64d3ac17a85e2d8b81f91cfab46b1679b577c55aaec44f1a0e8ff35321b0",
+      "sourceBytes": 10294,
+      "translated": true
+    },
+    "tools": {
+      "headings": 0,
+      "codeBlocks": 0,
+      "codeDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourceBytes": 4146,
+      "translated": true
+    }
+  }
+}
