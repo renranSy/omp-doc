@@ -13,15 +13,15 @@ source: https://omp.sh/docs/settings
 
 # 设置
 
-## 它住在哪里
+## 配置文件位置
 
-持久设置位于 `~/.omp/agent/config.yml` （使用覆盖父目录 `PI_CODING_AGENT_DIR` 或将 config 根重命名为 `PI_CONFIG_DIR`）。该文件是一个普通的 YAML 树；缺少的键会归入内置默认值。
+持久化设置位于 `~/.omp/agent/config.yml`。可通过 `PI_CODING_AGENT_DIR` 改写 Agent 目录，或通过 `PI_CONFIG_DIR` 改写配置根目录。该文件是普通 YAML；未设置的键会使用内置默认值。
 
-通过三种方式编辑：
+可通过以下三种方式修改：
 
--   `/settings` 在会话内 - 菜单驱动，在保存时验证。
--   `omp config <action>` 从 shell — 脚本化编辑，请参阅 [CLI 参考](/docs/cli).
--   您的文本编辑器 - 下次启动时重新阅读；格式错误的 YAML 会使 omp 记录警告并忽略整个文件，因此请在编辑后进行验证。
+- `/settings`：在会话内通过菜单修改，保存时会校验。
+- `omp config <action>`：在 Shell 中脚本化修改，参阅 [CLI 参考](/docs/cli)。
+- 文本编辑器：下次启动时重新读取；YAML 格式错误会导致 omp 记录警告并忽略整个文件，因此修改后应验证。
 
 ```sh
 omp config list                            # the full tree
@@ -33,40 +33,40 @@ omp config path                            # print the agent config directory
 
 ## 优先级
 
-从最高优先级到最低优先级：
+优先级从高到低如下：
 
 1.  CLI 标志（`--slow`, `--no-pty`, `--api-key`, …)
 2.  环境变量（`PI_SLOW_MODEL`, `ANTHROPIC_API_KEY`, …)
 3.  `~/.omp/agent/config.yml`
 4.  内置默认值
 
-OAuth 保存的凭据 `/login` 住在 `agent.db` 旁边 `config.yml` 并遵循相同的查找顺序：token-in-db 胜过相同 provider 的环境变量。
+通过 `/login` 保存的 OAuth 凭据存放在 `agent.db` 中。解析同一 Provider 的凭据时，数据库中的 Token 优先于环境变量。
 
 ## 顶级键
 
-| 钥匙 | 它控制什么 |
+| 配置键 | 作用 |
 | --- | --- |
-| `theme` | 终端调色板。 `theme.dark` / `theme.light` 命名内置或用户调色板。 |
-| `modelRoles` | 角色→模型图（`default`, `smol`, `slow`, `plan`, `commit`）。参见 [模型角色](/docs/roles). |
-| `steeringMode` | 排队的转向消息如何耗尽： `one-at-a-time` （默认）或 `all`. |
-| `followUpMode` | Turn后排队的后续行动如何消耗： `one-at-a-time` （默认）或 `all`. |
-| `interruptMode` | `immediate` （默认）缩短飞行中工具调用以进行转向； `wait` 推迟直到它返回。 |
-| `tools.discoveryMode` | 磁盘工具是否自动注册或需要显式允许列表。 |
-| `debug.enabled` | 表面 `debug` 工具和 DAP 支持的流程。默认关闭。 |
-| `extensions` | 超出自动发现范围的显式扩展路径。 |
-| `skills` | 每个 skill 启用/禁用地图。 |
-| `images.autoResize` | 发送前自动缩小附加图像。默认开启。 |
-| `searxng` | 自托管 web-搜索端点： `endpoint`, `token`, `basicUsername`, `basicPassword`. |
+| `theme` | 终端配色；`theme.dark` 和 `theme.light` 可指定内置或自定义主题。 |
+| `modelRoles` | 角色到模型的映射（`default`、`smol`、`slow`、`plan`、`commit`）。参阅[模型角色](/docs/roles)。 |
+| `steeringMode` | 转向消息的队列策略：`one-at-a-time`（默认）或 `all`。 |
+| `followUpMode` | 后续消息的队列策略：`one-at-a-time`（默认）或 `all`。 |
+| `interruptMode` | `immediate`（默认）会立即中断当前工具调用以处理转向；`wait` 会等待其返回。 |
+| `tools.discoveryMode` | 控制磁盘上的工具是自动注册还是需显式允许。 |
+| `debug.enabled` | 是否启用 `debug` 工具与 DAP 支持；默认关闭。 |
+| `extensions` | 自动发现范围以外的显式扩展路径。 |
+| `skills` | 分别启用或禁用各个 Skill。 |
+| `images.autoResize` | 发送前自动缩小附件图片；默认开启。 |
+| `searxng` | 自托管 Web 搜索端点的 `endpoint`、`token`、`basicUsername` 和 `basicPassword`。 |
 
-列出的按键是用户最常触摸的按键； `omp config list` 打印模式知道的所有内容，包括 provider 特定的子树和 TUI 内部结构。
+上表是最常用的设置。`omp config list` 会输出当前版本支持的全部配置，包括 Provider 专用子树和 TUI 内部设置。
 
-快捷键重新映射不存在于此 - 它们单独存储在 `~/.omp/agent/keybindings.yaml` （旧版 `keybindings.json` 会自动迁移）。参见 [快捷键](/docs/keybindings#customize).
+快捷键不在该文件中配置，而是单独保存在 `~/.omp/agent/keybindings.yaml`（旧版 `keybindings.json` 会自动迁移）。参阅[快捷键](/docs/keybindings#customize)。
 
 ## 常用旋钮
 
 ### 为每个角色选择默认模型
 
-角色名称稳定；根据活动的 provider 目录分配具体模型 ID。 `omp --list-models` 转储每个角色现在可以解决的问题。
+角色名称保持稳定，只需按当前可用的 Provider 目录分配具体模型 ID。`omp --list-models` 可列出当前可选择的模型。
 
 ```yaml
 # ~/.omp/agent/config.yml
@@ -78,11 +78,11 @@ modelRoles:
   commit:  anthropic/claude-haiku-4-5
 ```
 
-的 `commit` 角色驱动 `/commit` 管道；当提交消息发生漂移时，将其调整为更强大的模型，而对于嘈杂的存储库，将其调整为更便宜的模型。
+`commit` 角色用于 `/commit` 流程。提交信息质量不足时可换用能力更强的模型；在变更噪声较大的仓库中则可使用成本更低的模型。
 
 ### 调整消息队列
 
-当您在代理工作时键入时会发生什么：请参阅 [使用omp](/docs/using) 对于工作时间表。
+这三项决定智能体工作期间输入消息的处理方式；具体交互行为请参阅[使用 omp](/docs/using)。
 
 ```yaml
 steeringMode:  one-at-a-time   # or: all
@@ -109,4 +109,4 @@ theme:
 
 ## 安全编辑
 
-> 畸形的 `config.yml` 不阻止启动 - omp 记录警告并回退到内置默认值，默默地忽略整个文件。始终验证 `omp config list` 手动编辑后。
+> 格式错误的 `config.yml` 不会阻止启动：omp 会记录警告、忽略该文件并回退到内置默认值。手动编辑后请运行 `omp config list` 验证结果。

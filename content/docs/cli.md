@@ -20,45 +20,45 @@ omp [options] [@files...] [messages...]
 omp <command> [args] [flags]
 ```
 
-直接运行 `omp` 会在当前目录中打开交互式会话；使用 `-p` 时，它输出一次回答后退出。子命令会分派到该工具，而不是启动代理。每个带有值的标志也接受 `--flag=value`。任何前缀为 `@` 被视为文件，即使它位于标志之间。
+直接运行 `omp` 会在当前目录开启交互式会话；使用 `-p` 会完成一次提示词后退出。子命令会直接执行对应工具，而不会启动 Agent。带值的 Flag 也支持 `--flag=value` 形式。任何以 `@` 开头的参数都会被视为文件，即使位于 Flag 之间。
 
 ## 优先级
 
-CLI 标志 > 环境变量 > `~/.omp/agent/config.yml` > 内置默认值。 `--api-key` 覆盖该次运行的所有内容并且永远不会持久化；看到 [Provider](/docs/providers) 了解每个 provider 如何解析密钥。大多数标志都有一个 env-var 后备记录在 [Environment variables](/docs/env).
+优先级为 CLI Flag > 环境变量 > `~/.omp/agent/config.yml` > 内置默认值。`--api-key` 只覆盖当前运行，绝不会持久化。各 Provider 的凭据解析请参阅 [Provider](/docs/providers)，大多数 Flag 对应的环境变量请参阅[环境变量](/docs/env)。
 
 ## 模式
 
-omp 支持五种输出协议。选择一个与 `--mode`，或使用 `-p` 对于最常见的情况（一次性文本）。
+omp 支持五种输出协议。使用 `--mode` 选择协议；最常见的一次性文本场景可直接使用 `-p`。
 
 | 选项 | 描述 | 默认/注释 |
 | --- | --- | --- |
 | `--print, -p` | 一次性：发送提示、流式传输答案、退出。没有 TUI。 |  |
-| `--mode <mode>` | 输出协议。 | 文字| json | rpc | acp | rpc-ui |
-| `--export <file> [out]` | 将录制的 jsonl 会话呈现为 HTML 并退出。位置输出路径可选。 |  |
-| `--allow-home` | 允许从 $HOME 启动而不使用自动 chdir 进入临时目录。 |  |
+| `--mode <mode>` | 输出协议。 | `text`、`json`、`rpc`、`acp`、`rpc-ui` |
+| `--export <file> [out]` | 将记录的 JSONL 会话渲染为 HTML 后退出；输出路径可选。 |  |
+| `--allow-home` | 允许从 `$HOME` 启动，不自动切换到临时目录。 |  |
 
 | 模式 | 描述 |
 | --- | --- |
-| `text` | 默认。纯文本流式传输到标准输出。与脚本的 -p 配对。 |
-| `json` | 标准输出上以换行符分隔的 JSON 事件。形状稳定，可通过通过管道传给其他工具。 |
-| `rpc` | 通过 stdio 的 JSON-RPC。由 SDK 和编程客户端使用。 |
-| `rpc-ui` | 与 rpc 相同，TUI 内工具调用 UI 呈现给客户端。 |
-| `acp` | 基于 stdio 的Agent Client Protocol。与 omp acp 相同的wire format。 |
+| `text` | 默认模式；将纯文本流式写入标准输出，适合配合 `-p`。 |
+| `json` | 在标准输出写入 JSON Lines 事件，格式稳定，适合管道处理。 |
+| `rpc` | 通过 stdio 使用 JSON-RPC，供 SDK 与编程客户端调用。 |
+| `rpc-ui` | RPC 变体，将 TUI 内的工具调用 UI 请求交给 Client 呈现。 |
+| `acp` | 通过 stdio 使用 Agent Client Protocol，与 `omp acp` 的协议格式相同。 |
 
-对于 `rpc`, `rpc-ui`, 和 `acp`，参见 [RPC模式](/docs/rpc) 和 [ACP](/docs/acp) 对于wire format和 SDK 客户端。
+`rpc`、`rpc-ui` 和 `acp` 的协议格式与客户端用法，请分别参阅 [RPC 模式](/docs/rpc) 和 [ACP](/docs/acp)。
 
 ## 模型
 
-选择活动模型和角色覆盖。有关角色语义，请参阅 [模型角色](/docs/roles);有关凭据和 OAuth，请参阅 [Provider](/docs/providers).
+以下 Flag 用于选择活动模型或覆盖模型角色。角色语义请参阅[模型角色](/docs/roles)，凭据与 OAuth 请参阅 [Provider](/docs/providers)。
 
 | 选项 | 描述 | 默认/注释 |
 | --- | --- | --- |
 | `--model <id-or-role>` | 要使用的模型或已配置的角色。可传入角色名（`slow`、`@slow`），也支持模型的模糊匹配（如 `opus`、`gpt-5.2` 或 `openai/gpt-5.2`）。 | 最近使用的模型或 `modelRoles.default` |
-| `--provider <name>` | Provider 提示。主要用于兼容旧版；通常只需使用 `--model`。 | — |
-| `--smol <id>` | 覆盖此运行的 smol 角色（快速/廉价的帮助任务）。 | PI\_SMOL\_MODEL 或设置 |
-| `--slow <id>` | 超越缓慢的角色（深度推理、计划）。 | PI\_SLOW\_MODEL 或设置 |
-| `--plan <id>` | 覆盖 计划模式 运行时使用的计划角色。 | PI\_PLAN\_MODEL 或设置 |
-| `--models <p1,p2,…>` | 用于角色循环的逗号分隔模式。每个项目都是“id\[:effort\]”。 | 请参阅/docs/角色。 |
+| `--provider <name>` | Provider 提示，主要用于兼容旧版；通常只需设置 `--model`。 | — |
+| `--smol <id>` | 覆盖本次运行的 `smol` 角色（快速、低成本的辅助任务）。 | `PI_SMOL_MODEL` 或配置 |
+| `--slow <id>` | 覆盖 `slow` 角色（深度推理、规划）。 | `PI_SLOW_MODEL` 或配置 |
+| `--plan <id>` | 覆盖计划模式使用的 `plan` 角色。 | `PI_PLAN_MODEL` 或配置 |
+| `--models <p1,p2,…>` | 角色循环使用的逗号分隔模式；每项为 `id[:effort]`。 | 参阅[模型角色](/docs/roles)。 |
 | `--list-models [pattern]` | 打印发现的模型并退出。可选模式过滤列表。 | 兼作身份验证探针。 |
 | `--thinking <level>` | 推理努力。 | 最小、低、中、高、xhigh |
 | `--api-key <key>` | 将此键仅用于所选的 provider 运行。 | 不会持久化。请参阅/docs/providers。 |
