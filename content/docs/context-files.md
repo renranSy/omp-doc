@@ -15,18 +15,18 @@ source: https://omp.sh/docs/context-files
 
 ## 四个文件
 
-将其中之一拖放到您的项目旁边（或在 `~/.omp/agent/` 对于全局范围）并且 omp 在下一个会话开始时拾取它。无需重新加载，无需 config 条目 — 发现是文件系统驱动的。
+将这些文件放在项目目录或全局目录 `~/.omp/agent/` 中，omp 会在下一次会话启动时自动发现。无需重新加载，也无需额外配置；发现完全由文件系统驱动。
 
-| 文件 | 它的作用 | 当经纪人看到它时 |
+| 文件 | 作用 | 加载时机 |
 | --- | --- | --- |
-| `AGENTS.md` | 项目笔记——约定、陷阱、事物存在的地方。 | 在会话开始时注入系统提示符。 |
-| `SYSTEM.md` | 完全取代内置系统提示符。仅当您知道要删除的内容时才使用。 | 替换会话开始时的系统提示符。 |
-| `APPEND_SYSTEM.md` | 附加在内置系统提示符之后。 | 在会话开始时连接到系统提示符。 |
-| `RULES.md` | 粘性规则 - 作为始终应用的规则加载，其全文被注入到系统提示中。 | 出现在每个请求上，而不仅仅是在会话开始时出现。 |
+| `AGENTS.md` | 项目说明，如约定、陷阱和目录结构。 | 会话开始时注入系统提示词。 |
+| `SYSTEM.md` | 完全替换内置系统提示词；仅在明确知道需要移除哪些内置指令时使用。 | 会话开始时替换系统提示词。 |
+| `APPEND_SYSTEM.md` | 追加到内置系统提示词之后。 | 会话开始时注入。 |
+| `RULES.md` | 始终生效的持久规则；全文会进入系统提示词。 | 每次请求都会生效。 |
 
-## 他们住的地方
+## 文件位置
 
-项目文件从当前工作目录向上走到存储库根目录（或存储库外部时的主目录），因此任何祖先签出根目录都是公平的游戏。全局文件位于 `~/.omp/agent/` 并应用于每个会话。
+项目文件会从当前工作目录向上查找到仓库根目录（仓库外则查到主目录），因此祖先目录中的文件也可能被发现。全局文件位于 `~/.omp/agent/`，对每个会话生效。
 
 ```text
 <repo>/AGENTS.md            # project notes (also walked from subdirs)
@@ -40,21 +40,21 @@ source: https://omp.sh/docs/context-files
 ~/.omp/agent/RULES.md
 ```
 
-还发现了邻近的harness 文件：Codex `AGENTS.md`, Claude `CLAUDE.md`, Cursor 规则, `.clinerules`, Copilot 指令，打开代码上下文文件。每个加载的条目都显示在 [`/extensions`](/docs/slash) 及其源路径。
+omp 还会发现相邻 Agent 工具的约定文件，例如 Codex 的 `AGENTS.md`、Claude 的 `CLAUDE.md`、Cursor 规则、`.clinerules` 与 Copilot 指令。每个已加载条目及其来源路径都会显示在 [`/extensions`](/docs/slash) 中。
 
-## 决议顺序
+## 解析顺序
 
-当超过 1 个时 `AGENTS.md` 存在，omp 按此顺序连接它们，最一般的首先：
+存在多个 `AGENTS.md` 时，omp 按以下顺序拼接，越通用的内容越靠前：
 
-1.  全球 — `~/.omp/agent/AGENTS.md`
-2.  项目祖先——每一个 `AGENTS.md` 走上来从 `cwd`, 最远的优先
-3.  最近的 `.omp/AGENTS.md` 走上来从 `cwd`
+1. 全局：`~/.omp/agent/AGENTS.md`
+2. 项目祖先：从 `cwd` 向上查找的每个 `AGENTS.md`，最远的优先
+3. 最近的 `.omp/AGENTS.md`
 
-对于 `SYSTEM.md` 和 `APPEND_SYSTEM.md` 仅适用一个文件：最近的项目文件胜过全局文件，而不是与其连接。对于 `RULES.md`，两个范围都适用——全局 `~/.omp/agent/RULES.md` 以及最近的项目 `.omp/RULES.md` 当存在时，每个规则都会被加载为始终应用的规则。
+`SYSTEM.md` 和 `APPEND_SYSTEM.md` 只会使用一个文件：最近的项目文件优先于全局文件，不会进行拼接。`RULES.md` 则会同时使用全局 `~/.omp/agent/RULES.md` 与最近的项目 `.omp/RULES.md`；二者都作为始终生效的规则加载。
 
 ## AGENTS.md 的实践
 
-治疗 `AGENTS.md` 作为代理的自述文件。约定、构建命令、一个具有欺骗性的负载文件、它应该默认的目录布局。代理在会话开始时读取一次，因此请保持紧凑 - 长文件每次都会烧毁上下文。
+将 `AGENTS.md` 视为 Agent 的 README：写入约定、构建命令、容易误用的文件和推荐目录结构。Agent 会在会话开始时读取一次，因此应保持简洁，过长内容会持续消耗上下文。
 
 ```md
 # Project notes for the agent
@@ -75,11 +75,11 @@ source: https://omp.sh/docs/context-files
 
 ## RULES.md 和粘性行为
 
-`RULES.md` 是当指令必须保持执行时您需要访问的文件。 omp 将其加载为始终应用的规则，并将其完整内容注入系统提示符中，因此即使在多次对话之后，它也会满足每个请求。将其用于硬约束（“永远不要提交秘密”、“始终运行 `just test` 在屈服之前”），不适用于一般注释——那些属于 `AGENTS.md`.
+`RULES.md` 适合必须始终遵守的指令。omp 会将其作为持续规则加载，并把全文注入系统提示词，因此多轮对话后仍会对每次请求生效。请放置硬约束，例如“绝不提交 Secret”“交付前始终运行 `just test`”；一般项目说明应写在 `AGENTS.md` 中。
 
 ## 更换系统提示符
 
-`SYSTEM.md` 更换内置系统提示批发。您会丢失 omp 附带的精心调整的说明，包括工具使用指南。更喜欢 `APPEND_SYSTEM.md` 除非您特别想要不同的代理角色。
+`SYSTEM.md` 会完全替换内置系统提示词，因此也会移除 omp 自带的工具使用指导。除非确实需要完全不同的 Agent 角色，否则优先使用 `APPEND_SYSTEM.md`。
 
 ```md
 # ~/.omp/agent/APPEND_SYSTEM.md
@@ -91,13 +91,13 @@ logs, and authn/authz changes that broaden access.
 
 ## 禁用发现
 
-| 旋钮 | 效果 |
+| 设置 / Flag | 作用 |
 | --- | --- |
-| `disabledProviders` （设置） | 禁用单个发现提供程序（例如 `agents-md`, `claude`) — 将它们从 [`/extensions`](/docs/slash). |
-| `--no-rules` | 本次运行完全跳过规则发现 — `RULES.md`, `.omp/rules/`，以及其他规则源。 |
-| `--system-prompt <text|@file>` | 覆盖 CLI 的系统提示 — 优先于 `SYSTEM.md`. |
+| `disabledProviders` | 禁用指定发现来源，如 `agents-md`、`claude`；可在 [`/extensions`](/docs/slash) 查看。 |
+| `--no-rules` | 本次运行完全跳过 `RULES.md`、`.omp/rules/` 等规则来源。 |
+| `--system-prompt <text|@file>` | 覆盖 CLI 系统提示词，优先于 `SYSTEM.md`。 |
 
-运行 `omp -p '/extensions'` 确认实际加载了哪些文件。参见 [CLI 参考](/docs/cli) 了解完整的Flag详细信息和 [Skills](/docs/skills), [提示词模板](/docs/prompt-templates), 和 [Hooks](/docs/hooks) 对于其他定制表面。
+运行 `omp -p '/extensions'` 可确认实际加载了哪些文件。完整 Flag 请参阅 [CLI 参考](/docs/cli)；其他定制能力请参阅 [Skills](/docs/skills)、[提示词模板](/docs/prompt-templates) 和 [Hooks](/docs/hooks)。
 
 ## 仅禁用一个上下文文件
 
