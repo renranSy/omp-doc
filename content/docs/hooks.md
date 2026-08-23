@@ -13,7 +13,7 @@ source: https://omp.sh/docs/hooks
 
 # Hooks
 
-## hooks 住哪里
+## Hook 文件位置
 
 ```text
 ~/.omp/agent/hooks/pre/*.ts      # global pre-hooks
@@ -22,42 +22,42 @@ source: https://omp.sh/docs/hooks
 .omp/hooks/post/*.ts             # project post-hooks
 ```
 
-发现是非递归的：更深一层目录的文件将被忽略。从 CLI 开始， `--hook <path>` 加载一个显式文件（它是 `--extension`).
+发现是非递归的：更深层目录的文件会被忽略。CLI 可通过 `--hook <path>` 显式加载文件，它与 `--extension` 使用同一加载机制。
 
-## hook 可以做什么
+## Hook 能做什么
 
-| 表面 | 活动 | 退货合同 |
+| 场景 | 事件 | 返回约定 |
 | --- | --- | --- |
-| 工具调用门 | `tool_call` | 
-返回 `{ block: true, reason }` 拒绝来电。 `reason` 变成 模型看到的错误。第一个区块获胜。
+| 工具调用门 | `tool_call` |
+返回 `{ block: true, reason }` 可拒绝调用；`reason` 会作为工具错误提供给模型。第一个阻止结果生效。
 
  |
-| 工具结果重写 | `tool_result` | 
+| 工具结果改写 | `tool_result` |
 
-返回 `{ content?, details?, isError? }` 改变模型接收到的内容。 处理程序链。
-
- |
-| 每次呼叫消息编辑 | `context` | 
-
-返回 `{ messages }` 替换发送到模型的消息数组 打电话。处理程序链。
+返回 `{ content?, details?, isError? }` 可修改模型接收到的内容；处理器会按链路依次执行。
 
  |
-| 上下文压缩门 | `session_before_compact` | 
+| 每次调用的消息改写 | `context` |
 
-返回 `{ cancel: true }` 否决压缩。相同的形状 `session_before_branch`, `session_before_switch`, `session_before_tree`.
+返回 `{ messages }` 可替换即将发送给模型的消息数组；处理器会按链路依次执行。
 
  |
-| 会话生命周期 | 
+| 上下文压缩门 | `session_before_compact` |
+
+返回 `{ cancel: true }` 可取消压缩。同样的返回形式适用于 `session_before_branch`、`session_before_switch`、`session_before_tree`。
+
+ |
+| 会话生命周期 |
 
 `session_start`, `session_shutdown`, `turn_start`, `turn_end`, `message_*`, `tool_execution_*`
 
- | 观察性的。返回值被忽略。 |
+| 仅用于观测，返回值会被忽略。 |
 
-请参阅 `HookAPI` 输入完整的事件列表。 `HookAPI` 是狭窄的事件处理程序表面； `ExtensionAPI` 是还注册命令、工具和渲染器的超集——当您需要更多内容时就可以使用它 `on`.
+完整事件列表请查阅 `HookAPI` 类型。`HookAPI` 仅提供事件处理能力；`ExtensionAPI` 是其超集，还能注册命令、工具和渲染器，需要更多能力时应使用 `ExtensionAPI.on`。
 
 ## 块 `rm -rf` 在bash中
 
-一个拒绝之前一些灾难性形状的前置工具hook `bash` 曾经运行过。处理程序返回 `{ block: true, reason }` 和代理表面 `reason` 作为工具错误。
+下面的前置 `bash` Hook 会在执行前拦截一些危险命令。处理器返回 `{ block: true, reason }`，Agent 会把 `reason` 作为工具错误处理。
 
 ```ts
 // ~/.omp/agent/hooks/pre/guard-rm.ts
@@ -77,11 +77,11 @@ export default function (pi: HookAPI) {
 }
 ```
 
-> 第一个 `block` 胜利 - 跨多个 hooks 之前的排序是文件系统稳定的，但将正则表达式视为您的最后一道防线，而不是唯一的一道防线。
+> 多个 Hook 同时阻止时，以第一个 `block` 为准。文件系统的加载顺序是稳定的，但正则表达式应只是最后一道防线，而非唯一的安全措施。
 
 ## 编辑工具输出中的秘密
 
-重写的后置工具hook `read` 结果在模型看到它们之前擦洗 API 键。
+下面的后置 `read` Hook 会在模型看到结果前清除其中的 API Key。
 
 ```ts
 // ~/.omp/agent/hooks/post/redact-keys.ts
@@ -100,6 +100,6 @@ export default function (pi: HookAPI) {
 }
 ```
 
-## 调试 hook
+## 调试 Hook
 
-运行 `omp -p '/extensions'` 确认 hook 加载以及来自哪个路径。如果丢失，则该文件不在已发现的目录中 - 将其移至下面 `~/.omp/agent/hooks/pre/` 或 `.omp/hooks/pre/`，或者显式加载它 `--hook /path/to/file.ts`。参见 [提示词模板](/docs/prompt-templates) 和 [Skills](/docs/skills) 对于相邻的定制表面，以及 [上下文文件](/docs/context-files) 当您想要每轮注入静态规则而不是活动门时。
+运行 `omp -p '/extensions'` 可确认 Hook 是否加载及其来源路径。若缺失，说明该文件不在已发现目录中：将其移到 `~/.omp/agent/hooks/pre/` 或 `.omp/hooks/pre/`，或通过 `--hook /path/to/file.ts` 显式加载。相关定制能力请参阅[提示词模板](/docs/prompt-templates)和 [Skills](/docs/skills)；如需每回合注入静态规则而不是动态拦截，请使用[上下文文件](/docs/context-files)。

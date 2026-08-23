@@ -13,9 +13,9 @@ source: https://omp.sh/docs/skills
 
 # Skills
 
-## skill 是什么
+## Skill 是什么
 
-skill 是指定目录下的 Markdown 剧本。只有它的正面内容 `description` 停留在系统提示符中。当模型将当前任务与该描述匹配时，或者当您使用以下命令调用它时，主体会加载 `/skill:<name>`。长剧本在需要之前不需要任何成本。
+Skill 是放在指定目录中的 Markdown 工作手册。未加载前，系统提示词中只保留其 frontmatter 的 `description`；模型判断当前任务与描述匹配时，或你手动执行 `/skill:<name>` 时，才会加载正文。因此较长的手册不会在无需使用时消耗上下文。
 
 ## 布局
 
@@ -26,17 +26,17 @@ skill 是指定目录下的 Markdown 剧本。只有它的正面内容 `descript
 ~/.codex/skills/,  .codex/skills/       # also discovered
 ```
 
-发现是非递归的 — 每个目录一个 skill，直接位于 `skills/`。 skill 目录内的同级文件可从模型中寻址，如下所示 `skill://<name>/path/to/file.md`.
+发现是非递归的：每个目录只对应一个 Skill，且必须直接位于 `skills/` 下。Skill 目录内的同级文件可通过 `skill://<name>/path/to/file.md` 供模型读取。
 
-## 前题
+## Frontmatter
 
-| 领域 | 必填 | 效果 |
+| 字段 | 必填 | 作用 |
 | --- | --- | --- |
-| `name` | 不 | Skill 标识符；默认为目录名称。用于 `/skill:<name>` 和 `skill://<name>` 网址。 |
-| `description` | 是的 | 在 skill 加载之前模型看到的唯一部分。具体动词+名词+范围。 |
-| `hide` | 不 | 保持 skill 可通过以下方式加载 `skill://<name>` 和 `/skill:<name>` 但将其排除在系统提示列表之外。 |
+| `name` | 否 | Skill 标识符；默认使用目录名。用于 `/skill:<name>` 和 `skill://<name>` URL。 |
+| `description` | 是 | Skill 加载前模型唯一可见的内容；应包含具体动词、名词和适用范围。 |
+| `hide` | 否 | 仍可通过 `skill://<name>` 与 `/skill:<name>` 加载，但不会列入系统提示词中的 Skill 清单。 |
 
-## 完整的SKILL.md
+## 完整的 `SKILL.md`
 
 ```md
 ---
@@ -61,9 +61,9 @@ description: Writing, reviewing, or optimizing Postgres queries, schemas, or con
 - `skill://postgres/references/explain.md` — reading EXPLAIN output
 ```
 
-## 写出火爆的描述
+## 编写有效的描述
 
-该模型选择 skills 的方式与选择工具的方式相同：它将任务与描述文本进行匹配。模糊的描述会被跳过；列出动词（写作、审查、调试）、名词（Postgres 查询、Lambda 错误、快照测试）以及有用的范围（`src/parser/`, `*.test.ts`).
+模型选择 Skill 的方式与选择工具相同：将当前任务与描述文本匹配。描述过于笼统时容易被跳过；应明确写出动词（编写、审查、调试）、对象（Postgres 查询、Lambda 错误、快照测试）和范围（`src/parser/`、`*.test.ts`）。
 
 **坏：“有助于数据库方面的工作。”**
 
@@ -73,17 +73,17 @@ description: Writing, reviewing, or optimizing Postgres queries, schemas, or con
 
 好：“为导入器模块添加或扩展 Vitest 测试；涵盖固定装置、快照 测试和集成设置。”
 
-对于 skills 应该 *总是* 加载（项目约定、强制检查），无论如何都要保持描述具体，然后使用显式调用 `/skill:<name>` 在您的第一个提示中，而不是在比赛中赌博。
+即使某个 Skill 应当始终使用（如项目约定或强制检查），也应保持描述具体；在第一条提示词中显式调用 `/skill:<name>`，不要依赖模型猜测。
 
 ## 范围界定和禁用
 
-| 标志/设置 | 效果 |
+| Flag / 设置 | 作用 |
 | --- | --- |
 | `--skills <p1,p2,…>` | 以逗号分隔的全局模式；仅保留匹配的 skills。 |
-| `--no-skills` | 为此运行完全禁用 skill 发现。 |
-| `skills.enabled: false` | 同样，坚持 `~/.omp/agent/config.yml`. |
+| `--no-skills` | 为本次运行完全禁用 Skill 发现。 |
+| `skills.enabled: false` | 在 `~/.omp/agent/config.yml` 中持久禁用。 |
 | `skills.ignoredSkills: [pattern, …]` | 按名称（全局模式）阻止 skills。 |
 | `skills.includeSkills: [pattern, …]` | 允许列表（全局模式）——仅加载这些。 |
 | `skills.enableSkillCommands: false` | 禁用 `/skill:<name>` 调用，同时保持发现打开。 |
 
-运行 `omp -p '/extensions'` 查看当前会话加载的 skills 以及从何处加载。将此页面与 [提示词模板](/docs/prompt-templates) 当您想要固定提示来调用 skill 时，并且使用 [上下文文件](/docs/context-files) 对于项目备注，应无条件在系统提示中。
+运行 `omp -p '/extensions'` 可查看当前会话加载了哪些 Skill 以及来源路径。若需要通过固定提示词调用 Skill，请参阅[提示词模板](/docs/prompt-templates)；需要始终注入系统提示词的项目说明，请使用[上下文文件](/docs/context-files)。
