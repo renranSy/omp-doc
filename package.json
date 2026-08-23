@@ -11,7 +11,7 @@
     "typecheck": "vue-tsc --noEmit -p tsconfig.json",
     "check:content": "node scripts/check-content.mjs",
     "check:seo": "node scripts/check-seo.mjs",
-    "build": "vitepress build content && node scripts/generate-robots.mjs"
+    "build": "vitepress build content && node scripts/generate-robots.mjs && node scripts/generate-clean-url-folders.mjs"
   },
   "dependencies": {
     "vitepress": "^1.6.4",
