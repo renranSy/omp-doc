@@ -12,7 +12,9 @@ try {
       if (key && !process.env[key]) process.env[key] = value
     }
   }
-} catch {}
+} catch {
+  // .env 为可选文件；本地构建不需要公开站点地址。
+}
 
 
 const root = resolve(import.meta.dirname, '..')

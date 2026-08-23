@@ -75,6 +75,8 @@ omp -p 'read memory://root/skills/<name>/SKILL.md'
 | `per-project` | 每个工作目录都有单独的银行。 |
 | `per-project-tagged` （默认） | 与 1 家共享银行 `project:<cwd>` 标签，以便全局和每个项目的记忆在调用时合并。 |
 
+对于两种项目级作用域，omp 都以同一规则生成项目名称：先找到仓库的主检出根目录（因此同一仓库的所有 linked worktree 会归到一起），再取其目录名并转换为小写。例如，检出目录为 `~/code/General` 时会使用 `project:general`。Hindsight 的标签区分大小写；这一步可避免同一仓库因路径大小写不同而被拆分为彼此不可见的记忆范围。
+
 ### 设置Hindsight
 
 四 `hindsight.*` 键入 `~/.omp/agent/config.yml` 足以连接：

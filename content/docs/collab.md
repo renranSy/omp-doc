@@ -102,3 +102,9 @@ ws://localhost:7475/r/<roomId>#<key> → plain ws, allowed for localhost only
 | --- | --- | --- |
 | `collab.relayUrl` | `wss://my.omp.sh` | 继电器使用者 `/collab` 当没有内联传递继电器时 |
 | `collab.displayName` | 操作系统用户名 | 向其他参与者显示的姓名 |
+
+## 自托管中继
+
+生产环境使用的 Go 中继目前没有发布可自托管的源码或独立二进制文件；上文的端点仅描述托管服务的网络契约，并不表示存在可安装的发行版。
+
+仓库为本地协议开发提供了一个仅支持 WebSocket 的替代实现：`packages/collab-web/scripts/local-relay.ts`。在 `packages/collab-web` 中运行 `bun run relay` 后，它会监听 `ws://localhost:7466` 并实现 `/r/<roomId>`。该替代实现不提供浏览器客户端、`/share` blob 或 `/healthz`，不能代替生产服务。

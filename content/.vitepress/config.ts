@@ -28,7 +28,9 @@ try {
       if (key && !process.env[key]) process.env[key] = value
     }
   }
-} catch {}
+} catch {
+  // .env 为可选文件；未提供时保持当前进程环境不变。
+}
 
 
 const manifestPath = fileURLToPath(new URL('../../scripts/content-manifest.json', import.meta.url))

@@ -98,3 +98,23 @@ logs, and authn/authz changes that broaden access.
 | `--system-prompt <text|@file>` | 覆盖 CLI 的系统提示 — 优先于 `SYSTEM.md`. |
 
 运行 `omp -p '/extensions'` 确认实际加载了哪些文件。参见 [CLI 参考](/docs/cli) 了解完整的Flag详细信息和 [Skills](/docs/skills), [提示词模板](/docs/prompt-templates), 和 [Hooks](/docs/hooks) 对于其他定制表面。
+
+## 仅禁用一个上下文文件
+
+`disabledProviders` 会移除整个发现来源。若只想排除某一个上下文文件、同时保留该来源提供的 MCP Server、命令、Skills、Hooks、工具和设置，请在 `disabledExtensions` 中列出它的扩展 ID：
+
+```yaml
+# ~/.omp/agent/config.yml、.omp/config.yml 或 --config 覆盖层
+disabledExtensions:
+  - context-file:user:CLAUDE.md
+```
+
+上下文文件 ID 的格式为 `context-file:<level>:<basename>`：`<level>` 是 `user` 或 `project`，`<basename>` 是不含目录的文件名。
+
+| ID | 禁用范围 |
+| --- | --- |
+| `context-file:user:CLAUDE.md` | 用户级 `CLAUDE.md`；Claude 发现到的其他能力仍会加载。 |
+| `context-file:project:AGENTS.md` | 发现路径上每一层项目级 `AGENTS.md`。ID 不携带目录深度。 |
+| `context-file:user:AGENTS.md` | 任意来源提供的同名用户级 `AGENTS.md`。 |
+
+禁用发生在去重之前。因此，被禁用的文件不再占用其作用域，原来被它遮蔽的候选文件会接替生效。`disabledExtensions` 不支持路径作用域，并且和其他数组设置一样会被更高优先级的设置层整体替换。可在 `/extensions` 中查看这些 ID 与当前禁用状态。

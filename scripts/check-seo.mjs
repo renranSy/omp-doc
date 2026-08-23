@@ -14,7 +14,9 @@ try {
       if (key && !process.env[key]) process.env[key] = value
     }
   }
-} catch {}
+} catch {
+  // .env 为可选文件；检查脚本仍可使用显式传入的 SITE_URL。
+}
 
 
 const root = resolve(import.meta.dirname, '..')

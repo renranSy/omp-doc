@@ -53,7 +53,7 @@ omp 支持五种输出协议。选择一个与 `--mode`，或使用 `-p` 对于�
 
 | 选项 | 描述 | 默认/注释 |
 | --- | --- | --- |
-| `--model <id>` | 活跃模型。与 registry 进行模糊匹配（例如 sonnet、gpt-5-codex）。 | 最后使用或 modelRoles.default |
+| `--model <id-or-role>` | 要使用的模型或已配置的角色。可传入角色名（`slow`、`@slow`），也支持模型的模糊匹配（如 `opus`、`gpt-5.2` 或 `openai/gpt-5.2`）。 | 最近使用的模型或 `modelRoles.default` |
 | `--provider <name>` | Provider 提示。主要用于兼容旧版；通常只需使用 `--model`。 | — |
 | `--smol <id>` | 覆盖此运行的 smol 角色（快速/廉价的帮助任务）。 | PI\_SMOL\_MODEL 或设置 |
 | `--slow <id>` | 超越缓慢的角色（深度推理、计划）。 | PI\_SLOW\_MODEL 或设置 |

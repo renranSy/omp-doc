@@ -61,6 +61,17 @@ PI_NO_PTY=1
 | `VISUAL`, `EDITOR` | 首选外部编辑器和后备，使用者 Ctrl+G. |
 | `PUPPETEER_EXECUTABLE_PATH` | 告诉浏览器工具要启动哪个 Chromium 二进制文件。 |
 
+## Provider 网络代理
+
+Provider 请求会在应用 `NO_PROXY` / `no_proxy` 后按以下顺序选择代理：特定 Provider 的 `PI_PROXY_<PROVIDER>`、通用 `PI_PROXY`，然后才是 `HTTPS_PROXY`、`HTTP_PROXY` 与小写等价变量。
+
+两种 `PI_PROXY` 的覆盖范围不同：
+
+- `PI_PROXY` 会在 CLI 启动时安装到进程级 `fetch`，因此 OAuth 登录与刷新、用量探测、模型发现等不属于某个 Provider 请求包装器的网络请求也会走代理。
+- `PI_PROXY_<PROVIDER>` 只影响指定 Provider 的请求，并会覆盖它的 `PI_PROXY`；它不会代理上述通用请求。若该 Provider 的地区限制同时影响登录或刷新，请一并设置 `PI_PROXY`。
+
+回环地址、链路本地地址、私有网段（`10/8`、`172.16/12`、`192.168/16`）以及 `NO_PROXY` 中列出的目标始终直连，因此本地模型 Server 和 MCP Host 不会意外经过代理。
+
 ## Provider 凭证
 
 您要使用的每个 provider 一把钥匙。对于 Anthropic、OpenAI Codex、GitHub Copilot、Kimi、Cursor 和 Qwen Portal，交互式 `/login` 将 OAuth 凭证写入 `~/.omp/agent/agent.db` 通常比管理 API 密钥更麻烦。参见 [Provider](/docs/providers) 完整的 OAuth 矩阵和登录流程。
