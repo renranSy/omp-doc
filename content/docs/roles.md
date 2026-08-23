@@ -15,29 +15,29 @@ source: https://omp.sh/docs/roles
 
 ## 核心角色
 
-角色是在特定时刻达到的指定插槽。为每个角色固定一个模型，代理无需询问即可选择合适的模型。
+模型角色是为特定工作预留的固定槽位。为每个角色指定模型后，omp 可以在无需额外询问的情况下选择合适的模型。
 
 `default`
 
-默认模型。用于未包含更具体角色的每个回合 - 正常 实施工作、互动聊天、工具调用。
+默认模型。用于没有更具体角色的常规回合，包括实现任务、交互式对话和工具调用。
 
 `smol`
 
-又快又便宜。标题生成、分类、重试摘要消息、任何广泛的内容 比深度更重要。在此处固定俳句/迷你/纳米级模型。
+速度快、成本低。适用于标题生成、分类、重试摘要，以及广度比深度更重要的任务。通常为该角色指定 Haiku、Mini 或 Nano 级模型。
 
 `slow`
 
-深刻的推理。架构决策、粗糙的调试、一次错误的调用会导致更高的成本 比额外的花费。固定 Opus 级或 Codex 级模型。
+深度推理模型。适用于架构决策、复杂调试，以及一次错误决策的代价高于额外模型成本的任务。通常使用 Opus 或 Codex 级模型。
 
 `plan`
 
-使用者 [计划模式](/docs/plan) — 的 `/plan` 转向和计划审查 通过。
+供[计划模式](/docs/plan)使用，包括 `/plan` 的规划回合和计划审查。
 
-特定时刻还存在四个角色—— `vision` （具有图像功能的后备）， `designer` （设计师子代理）， `commit` （提交消息生成），以及 `task` （分代理工作）。他们通过同样的方式解决 `modelRoles` 地图。
+此外还有 `vision`（支持图像的后备模型）、`designer`（设计子智能体）、`commit`（生成提交信息）和 `task`（子智能体任务）等角色；它们同样通过 `modelRoles` 映射解析。
 
 ## 配置角色
 
-设置默认值 `~/.omp/agent/config.yml` （见 [设置](/docs/settings)):
+在 `~/.omp/agent/config.yml` 中设置默认值，参阅[设置](/docs/settings)：
 
 ```yaml
 modelRoles:
@@ -47,11 +47,11 @@ modelRoles:
   plan: claude-opus-4-6:high
 ```
 
-值可以是规范的 id (`claude-sonnet-4-6`）或明确的 `provider/model` 选择器。尾随一个 `:level` 固定思维水平—— `off`, `minimal`, `low`, `medium`, `high`, `xhigh`.
+值可以是规范模型 ID（如 `claude-sonnet-4-6`），也可以是明确的 `provider/model` 选择器。末尾追加 `:level` 可固定思考强度：`off`、`minimal`、`low`、`medium`、`high`、`xhigh`。
 
 ## 启动时覆盖
 
-每个角色都有一面Flag——除了 `default` 环境变量 — 覆盖会话配置的默认值。
+每个角色都有对应的 CLI Flag，可覆盖会话配置；`default` 角色没有单独的环境变量。
 
 | 角色 | Flag | 环境变量 |
 | --- | --- | --- |
@@ -64,16 +64,16 @@ modelRoles:
 omp --slow gpt-5.3-codex:xhigh --smol claude-haiku-4-5
 ```
 
-## 使用 Ctrl+P 循环直播
+## 使用 Ctrl+P 循环模型
 
-在一次会话中， Ctrl+P 通过模型 ID 列表旋转主插槽。默认情况下，该列表是配置的角色（`smol` → `default` → `slow`）。通行证 `--models` 将其范围限定为自定义列表：
+在会话中按 Ctrl+P 可在模型 ID 列表中循环切换主模型。默认列表为已配置的角色（`smol` → `default` → `slow`）；使用 `--models` 可指定自定义列表：
 
 ```sh
 omp --models sonnet,haiku:high
 ```
 
-每按一次就会切换到下一个 id。模式是模糊的并且接受 glob — `--models "github-copilot/*,*sonnet*"` 以同样的方式工作。 Shift+Ctrl+P 向后循环； Alt+P 打开一个不会写回的一次性选择器 `modelRoles`.
+每按一次会切换到下一个模型。模式支持模糊匹配和 glob，例如 `--models "github-copilot/*,*sonnet*"`。Shift+Ctrl+P 反向循环；Alt+P 打开一次性选择器，不会写回 `modelRoles`。
 
 > 循环仅更改当前会话的活动模型。编辑 `config.yml` 更改持久默认值。
 
-参见 [Provider](/docs/providers) 用于登录，以及 [自定义模型和Provider](/docs/custom-models) 添加您的角色可以定位的 id。
+登录方式请参阅 [Provider](/docs/providers)；如需添加角色可选的模型，请参阅[自定义模型与 Provider](/docs/custom-models)。

@@ -15,30 +15,30 @@ source: https://omp.sh/docs/tools
 
 ## 内置工具
 
-运行 `/tools` 在会话中查看实时工具界面；通过 `--tools read,search,edit` 在 CLI 上对其进行限制。下表列出了开箱即用的内容。
+在会话中运行 `/tools` 可查看当前可用工具；在 CLI 中可用 `--tools read,search,edit` 限制内置工具。下表列出开箱即用的工具。
 
-| 工具 | 总结 | 记录于 |
+| 工具 | 说明 | 详情 |
 | --- | --- | --- |
-| `ast_edit` | 通过 ast-grep 模式进行结构代码调制；在写入之前进行预览。 | [结构编辑](/docs/editing) |
-| `ast_grep` | 通过 ast-grep 模式进行结构代码搜索；的只读同级 `ast_edit`. | [结构编辑](/docs/editing) |
-| `bash` | 使用 cwd、env 和 PTY 控件在持久会话中运行 shell 命令。 | [处理文件](/docs/files) |
+| `ast_edit` | 使用 ast-grep 模式进行结构化代码修改，写入前会预览。 | [结构编辑](/docs/editing) |
+| `ast_grep` | 使用 ast-grep 模式进行结构化代码搜索，是 `ast_edit` 的只读对应工具。 | [结构编辑](/docs/editing) |
+| `bash` | 在持久会话中以指定 cwd、环境变量和 PTY 选项运行 Shell 命令。 | [处理文件](/docs/files) |
 | `browser` | 通过 Puppeteer 驱动真正的 Chromium 选项卡；选项卡在调用中持续存在。 | [Web & 浏览器](/docs/web) |
-| `debug` | DAP 驱动的断点、单步执行和本地检查。 | [调试](/docs/debugging) |
+| `debug` | 通过 DAP 设置断点、单步执行并检查局部变量。 | [调试](/docs/debugging) |
 | `edit` | 根据每个会话文件快照验证行锚定补丁。 | [处理文件](/docs/files) |
 | `eval` | 在持久内核中运行 Python 或 JS 单元。 | [处理文件](/docs/files) |
 | `find` | 通过 glob 快速查找文件名；按修改时间排序。 | [处理文件](/docs/files) |
-| `generate_image` | 具有主题、场景、照明和风格字段的结构化图像生成。 | [工具索引](/docs/tools) |
-| `github` | 基于 Op 的 gh 包装器：repo\_view、pr\_create、pr\_checkout、search\_\*、run\_watch。 | [GitHub](/docs/github) |
+| `generate_image` | 通过主题、场景、光照和风格字段生成结构化图像。 | [工具索引](/docs/tools) |
+| `github` | 基于 `gh` 的 GitHub 操作封装，如 `repo_view`、`pr_create`、`pr_checkout`、`search_*`、`run_watch`。 | [GitHub](/docs/github) |
 | `inspect_image` | 将本地图像传递给视觉模型并获取文本答案。 | [工具索引](/docs/tools) |
-| `irc` | 同一进程中的对等代理之间的短文消息；向停放的特工发送消息使其恢复。 | [子代理 & IRC](/docs/subagents) |
-| `job` | 列出、等待或取消由异步 bash 或任务启动的后台作业。 | [子代理 & IRC](/docs/subagents) |
+| `irc` | 在同一进程内的同级智能体间发送短消息；向暂停的智能体发送消息会将其恢复。 | [子智能体与 IRC](/docs/subagents) |
+| `job` | 列出、等待或取消由异步 bash 或 task 启动的后台作业。 | [子智能体与 IRC](/docs/subagents) |
 | `lsp` | 重命名、引用、定义、悬停、诊断、Code Action。 | [代码智能](/docs/code-intelligence) |
 | `read` | 文件、目录、档案、SQLite、文档、图像、内部 URI、web URL。 | [处理文件](/docs/files) |
-| `recipe` | 从项目的任务运行程序运行目标（bun，just，make，cargo）。 | [处理文件](/docs/files) |
+| `recipe` | 调用项目任务运行器中的目标，如 bun、just、make、cargo。 | [处理文件](/docs/files) |
 | `report_tool_issue` | 标记意外的工具行为以进行自动 QA 跟踪。 | [工具索引](/docs/tools) |
 | `resolve` | 应用或放弃待处理的预览操作（ast\_edit、计划模式批准）。 | [结构编辑](/docs/editing) |
 | `search` | 跨文件、目录、glob、内部 URL 的正则表达式内容搜索。 | [处理文件](/docs/files) |
-| `task` | 生成并行子代理；结果以 agent:// URL 的形式返回。 | [子代理 & IRC](/docs/subagents) |
-| `todo` | 分阶段任务跟踪在 TUI 中实时呈现。 | [子代理 & IRC](/docs/subagents) |
-| `web_search` | 通过第一个可用搜索 provider 调度一个查询。 | [Web & 浏览器](/docs/web) |
+| `task` | 创建并行子智能体，结果以 `agent://` URL 返回。 | [子智能体与 IRC](/docs/subagents) |
+| `todo` | 维护分阶段任务列表，并在 TUI 中实时显示。 | [子智能体与 IRC](/docs/subagents) |
+| `web_search` | 通过首个可用的搜索 Provider 执行查询。 | [Web 与浏览器](/docs/web) |
 | `write` | 创建或覆盖文件、归档条目或 SQLite 行。 | [处理文件](/docs/files) |
